@@ -1,0 +1,42 @@
+fastapi==0.115.14
+uvicorn[standard]==0.35.0 
+python-multipart==0.0.20
+python-dotenv==1.1  
+pydantic-settings==2.10.1
+aiofiles==24.1.0
+langchain==0.3.26
+langchain-community==0.3.27
+PyMuPDF==1.26.3
+motor==3.7.1
+openai==1.95.0
+cohere==5.16.1
+qdrant-client==1.14.3
+SQLAlchemy==2.0.36
+asyncpg==0.30.0
+alembic==1.14.0
+psycopg2-binary==2.9.10
+pgvector==0.4.0
+nltk==3.9.1
+
+# Monitoring and metrics :
+prometheus-client==0.21.1
+starlette-exporter==0.23.0
+
+# Health Checks : 
+fastapi-health==0.4.0
+
+
+# Task Queue and Background Processing
+celery==5.5.3
+redis==6.2.0
+kombu==5.5.4
+billiard==4.2.1
+vine==5.1.0
+flower==2.0.1
+
+
+
+
+
+
+
