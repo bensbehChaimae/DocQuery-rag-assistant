@@ -210,3 +210,14 @@ __marimo__/
  
 # Ignore Celery schedule files
 celerybeat-schedule.*
+
+
+# .gitignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.vscode
+
+TEST.md
