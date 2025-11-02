@@ -161,14 +161,14 @@ export default function Home() {
         <div className="container">
           <div className="text-center space-y-4 mb-16">
              <motion.h2
-      className="text-4xl lg:text-5xl font-bold text-section-title"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      viewport={{ once: true }}
-    >
-      How It <span className="text-primary">Works</span>
-    </motion.h2>
+              className="text-4xl lg:text-5xl font-bold text-section-title"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              How It <span className="text-primary">Works</span>
+            </motion.h2>
             <p className="text-xl text-section-subtitle max-w-2xl mx-auto">
               Three simple steps to unlock the power of your documents
             </p>

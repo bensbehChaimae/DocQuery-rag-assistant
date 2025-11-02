@@ -73,10 +73,10 @@ export default function Workspace() {
     <div className="min-h-screen dark bg-background">
       <Header />
       
-      <main className="container py-12">
+      <main className="container py-12 mt-8">
         {/* Page Header */}
         <div className="space-y-2 mb-8">
-          <h1 className="text-4xl font-bold">Your Projects</h1>
+          <h1 className="text-4xl !text-primary font-bold">Your Projects</h1>
           <p className="text-lg text-muted-foreground">
             Manage your document projects and collaborate with your team
           </p>
