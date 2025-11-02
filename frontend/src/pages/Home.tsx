@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Upload, Brain, MessageSquare, Database, Zap, Shield } from "lucide-react";
+import { Upload, Brain, MessageSquare, Database, Zap, Shield, Heart } from "lucide-react";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const steps = [
@@ -100,16 +101,53 @@ export default function Home() {
               <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full backdrop-blur-sm">
                 <span className="text-sm font-medium text-primary">AI-Powered Document Intelligence</span>
               </div>
-              <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
-                Welcome to <span className=" text-primary">DocQuery</span>
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              <motion.h1
+                className="text-5xl lg:text-7xl font-bold leading-tight"
+                animate={{
+                  y: [0, -8, 0],
+                }}
+                transition={{
+                  duration: 1.2, // ⚡ faster
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                }}
+              >
+                <motion.span
+                  className="text-hero"
+                  animate={{
+                    opacity: [1, 0.8, 1],
+                  }}
+                  transition={{
+                    duration: 1, // ⚡ faster flicker
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  Welcome to
+                </motion.span>{" "}
+                <motion.span
+                  className="text-primary"
+                  animate={{
+                    scale: [1, 1.08, 1],
+                  }}
+                  transition={{
+                    duration: 1.2, // ⚡ synced with float
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                >
+                  DocQuery
+                </motion.span>
+              </motion.h1>
+              
+              <p className="text-xl text-hero-secondary max-w-2xl mx-auto">
                 Your intelligent RAG chatbot assistant. Transform static documents into dynamic conversations with advanced AI technology.
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
-                <Link to="/workspace">
-                  <Button size="lg" className="gradient-primary shadow-glow text-lg h-14 px-8">
-                    Get Started
+                <Link to="/workspace" className="group relative inline-block">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary via-cyan-500 to-primary rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+                  <Button size="lg" className="relative gradient-primary shadow-glow text-lg h-14 px-8 hover:scale-105 transition-transform duration-200">
+                    Get Started Free
                   </Button>
                 </Link>
               </div>
@@ -122,10 +160,16 @@ export default function Home() {
       <section className="py-20 lg:py-32 bg-background">
         <div className="container">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold">
-              How It <span className="gradient-primary bg-clip-text text-transparent">Works</span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+             <motion.h2
+      className="text-4xl lg:text-5xl font-bold text-section-title"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      viewport={{ once: true }}
+    >
+      How It <span className="text-primary">Works</span>
+    </motion.h2>
+            <p className="text-xl text-section-subtitle max-w-2xl mx-auto">
               Three simple steps to unlock the power of your documents
             </p>
           </div>
@@ -138,9 +182,9 @@ export default function Home() {
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-4xl font-bold text-primary/20">0{index + 1}</span>
-                    <h3 className="text-2xl font-bold">{step.title}</h3>
+                    <h3 className="text-2xl font-bold text-card">{step.title}</h3>
                   </div>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-card leading-relaxed opacity-80">
                     {step.description}
                   </p>
                 </CardContent>
@@ -159,10 +203,16 @@ export default function Home() {
         
         <div className="container relative">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold">
-              Powered by <span className="gradient-primary bg-clip-text text-transparent">Advanced Technology</span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <motion.h2
+              className="text-4xl lg:text-5xl font-bold text-section-title"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              Powered by <span className="text-primary">Advanced Technology</span>
+            </motion.h2>
+            <p className="text-xl text-section-subtitle max-w-2xl mx-auto">
               Built on cutting-edge AI and cloud infrastructure
             </p>
           </div>
@@ -175,8 +225,8 @@ export default function Home() {
                     <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/20 to-cyan-500/20 flex items-center justify-center mx-auto group-hover:scale-110 transition-transform shadow-glow">
                       <tech.icon className="h-8 w-8 text-primary" />
                     </div>
-                    <h3 className="font-bold text-lg mt-4 group-hover:text-primary transition-colors">{tech.name}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{tech.description}</p>
+                    <h3 className="font-bold text-lg mt-4 text-card group-hover:text-primary transition-colors">{tech.name}</h3>
+                    <p className="text-sm text-card opacity-70 leading-relaxed">{tech.description}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -190,10 +240,12 @@ export default function Home() {
         <div className="container">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-sm text-muted-foreground">© 2025 DocQuery. All rights reserved.</span>
+              <span className="text-sm text-section-subtitle">© 2025 DocQuery. All rights reserved.</span>
             </div>
-            <div className="flex items-center gap-6">
-              <span className="text-sm text-muted-foreground">Built with FastAPI + React + RAG</span>
+            <div className="flex text-section-subtitle items-center gap-6">
+              <span>Built with passion for data and AI</span>
+              <Heart className="w-4 h-4 text-pink-500 fill-pink-500 animate-bounce" />
+              <span>& magic ✨</span>
             </div>
           </div>
         </div>

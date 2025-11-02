@@ -63,7 +63,7 @@ All colors MUST be HSL.
     --secondary-foreground: 210 40% 98%;
 
     --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
+    --muted-foreground: 215 20% 75%;
 
     --accent: 160 84% 39%;
     --accent-foreground: 0 0% 100%;
@@ -74,6 +74,13 @@ All colors MUST be HSL.
     --border: 217 33% 24%;
     --input: 217 33% 24%;
     --ring: 160 84% 39%;
+
+    /* Custom color tokens for better contrast */
+    --hero-text: 210 40% 85%;
+    --hero-text-secondary: 215 20% 70%;
+    --section-title: 210 40% 95%;
+    --section-subtitle: 215 20% 75%;
+    --card-text: 210 40% 90%;
 
     --gradient-primary: linear-gradient(135deg, hsl(160 84% 39%), hsl(180 84% 45%));
     --gradient-hero: linear-gradient(180deg, hsl(222 47% 11%), hsl(217 33% 17%));
@@ -123,4 +130,26 @@ All colors MUST be HSL.
     backdrop-filter: blur(12px);
     border: 1px solid hsl(var(--border) / 0.5);
   }
+
+  /* Text color utilities for better contrast */
+  .text-hero {
+    color: hsl(var(--hero-text, var(--foreground)));
+  }
+
+  .text-hero-secondary {
+    color: hsl(var(--hero-text-secondary, var(--muted-foreground)));
+  }
+
+  .text-section-title {
+    color: hsl(var(--section-title, var(--foreground)));
+  }
+
+  .text-section-subtitle {
+    color: hsl(var(--section-subtitle, var(--muted-foreground)));
+  }
+
+  .text-card {
+    color: hsl(var(--card-text, var(--card-foreground)));
+  }
 }
+
