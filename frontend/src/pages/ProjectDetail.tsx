@@ -20,17 +20,16 @@ export default function ProjectDetail() {
       <main className="container py-8">
         {/* Back Button */}
         <Button 
-          variant="ghost" 
+          className="gradient-primary" 
           onClick={() => navigate("/workspace")}
-          className="mb-6"
         >
-          <ArrowLeft className="h-4 w-4 mr-2" />
+          <ArrowLeft className="h-4 w-4 mr-2 " />
           Back to Workspace
         </Button>
 
         {/* Project Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Project {projectId}</h1>
+          <h1 className="text-4xl text-muted-foreground font-bold mb-2">Project {projectId}</h1>
           <p className="text-muted-foreground">Manage documents, chat, and configure settings</p>
         </div>
 

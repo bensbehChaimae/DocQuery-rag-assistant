@@ -74,6 +74,8 @@ export default function Workspace() {
       <Header />
       
       <main className="container py-12 mt-8">
+
+
         {/* Page Header */}
         <div className="space-y-2 mb-8">
           <h1 className="text-4xl !text-primary font-bold">Your Projects</h1>
@@ -81,6 +83,7 @@ export default function Workspace() {
             Manage your document projects and collaborate with your team
           </p>
         </div>
+
 
         {/* Search and Filter Bar */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -93,6 +96,7 @@ export default function Workspace() {
               className="pl-10"
             />
           </div>
+
           <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
             <DialogTrigger asChild>
               <Button className="gradient-primary shadow-glow">
@@ -102,30 +106,32 @@ export default function Workspace() {
             </DialogTrigger>
             <DialogContent className="dark">
               <DialogHeader>
-                <DialogTitle>Create New Project</DialogTitle>
+                <DialogTitle className="text-primary">Create New Project</DialogTitle>
               </DialogHeader>
               <div className="space-y-4 pt-4">
                 <div className="space-y-2">
-                  <Label htmlFor="project-name">Project Name</Label>
+                  <Label className="text-muted-foreground font-bold" htmlFor="project-name">Project Name</Label>
                   <Input
                     id="project-name"
                     placeholder="Enter project name"
+                    className="placeholder:text-muted-foreground/45 text-muted-foreground"
                     value={newProjectName}
                     onChange={(e) => setNewProjectName(e.target.value)}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="project-description">Description</Label>
+                  <Label className="text-muted-foreground font-bold" htmlFor="project-description">Description</Label>
                   <Textarea
                     id="project-description"
                     placeholder="Enter project description"
+                    className="placeholder:text-muted-foreground/45 text-muted-foreground"
                     value={newProjectDescription}
                     onChange={(e) => setNewProjectDescription(e.target.value)}
                     rows={3}
                   />
                 </div>
-                <div className="flex justify-end gap-3 pt-4">
-                  <Button variant="outline" onClick={() => setIsCreateModalOpen(false)}>
+                <div className="text-muted-foreground flex justify-end gap-3 pt-4">
+                  <Button className="hover:bg-red-600" variant="outline" onClick={() => setIsCreateModalOpen(false)}>
                     Cancel
                   </Button>
                   <Button className="gradient-primary" onClick={handleCreateProject}>
@@ -137,21 +143,10 @@ export default function Workspace() {
           </Dialog>
         </div>
 
+
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Create New Project Card */}
-          <Card 
-            className="border-dashed border-2 hover:border-primary hover:shadow-glow transition-smooth cursor-pointer group"
-            onClick={() => setIsCreateModalOpen(true)}
-          >
-            <CardContent className="flex flex-col items-center justify-center p-12 space-y-4">
-              <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center group-hover:shadow-glow transition-smooth">
-                <Plus className="h-8 w-8 text-primary" />
-              </div>
-              <p className="text-lg font-medium text-center">New Project</p>
-            </CardContent>
-          </Card>
-
+          
           {/* Project Cards */}
           {filteredProjects.map((project) => (
             <Card 
@@ -187,6 +182,19 @@ export default function Workspace() {
               </CardContent>
             </Card>
           ))}
+
+          {/* Create New Project Card */}
+          <Card 
+            className="border-dashed border-2 hover:border-primary hover:shadow-glow transition-smooth cursor-pointer group"
+            onClick={() => setIsCreateModalOpen(true)}
+          >
+            <CardContent className="flex flex-col items-center justify-center p-12 space-y-4">
+              <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center group-hover:shadow-glow transition-smooth">
+                <Plus className="h-8 w-8 text-primary" />
+              </div>
+              <p className="text-lg font-medium text-center">New Project</p>
+            </CardContent>
+          </Card>
         </div>
 
         {filteredProjects.length === 0 && (

@@ -95,8 +95,8 @@ export function SettingsTab({ projectId }: SettingsTabProps) {
       <Card className="glass border-destructive/50">
         <CardHeader>
           <div className="flex items-center gap-2">
-            <AlertTriangle className="h-5 w-5 text-destructive" />
-            <CardTitle className="text-destructive">Danger Zone</CardTitle>
+            <AlertTriangle className="h-5 w-5 text-red-500" />
+            <CardTitle className="text-red-500">Danger Zone</CardTitle>
           </div>
           <CardDescription>
             Irreversible actions for this project
@@ -112,23 +112,23 @@ export function SettingsTab({ projectId }: SettingsTabProps) {
             </div>
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button variant="destructive">
+                <Button className="bg-red-500 hover:bg-red-600" variant="destructive">
                   Delete Project
                 </Button>
               </AlertDialogTrigger>
               <AlertDialogContent className="dark">
                 <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogTitle className="text-red-500">Are you absolutely sure?</AlertDialogTitle>
                   <AlertDialogDescription>
                     This action cannot be undone. This will permanently delete your
                     project and remove all associated documents from our servers.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogCancel className="text-muted-foreground">Cancel</AlertDialogCancel>
                   <AlertDialogAction
                     onClick={handleDeleteProject}
-                    className="bg-destructive hover:bg-destructive/90"
+                    className="bg-red-500 hover:bg-red-600"
                   >
                     Delete Project
                   </AlertDialogAction>
