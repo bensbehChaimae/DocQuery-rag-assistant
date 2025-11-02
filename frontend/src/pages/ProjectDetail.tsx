@@ -6,31 +6,84 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UploadTab } from "@/components/project/UploadTab";
 import { ChatTab } from "@/components/project/ChatTab";
 import { SettingsTab } from "@/components/project/SettingsTab";
-import { ArrowLeft, Upload, MessageSquare, Settings } from "lucide-react";
+import { ArrowLeft, Upload, MessageSquare, Settings, Folder, FileText, Calendar } from "lucide-react";
 
 export default function ProjectDetail() {
   const { projectId } = useParams();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("upload");
 
+  // Mock project data - replace with actual data fetching
+  const projectData = {
+    name: `Project ${projectId}`,
+    description: "Legal Documents",
+    documentCount: 8,
+    createdAt: "2025-01-10"
+  };
+
   return (
     <div className="min-h-screen dark bg-background">
       <Header />
       
       <main className="container py-8">
-        {/* Back Button */}
+        {/* Back Button - Pill Style */}
         <Button 
-          className="gradient-primary" 
+          variant="outline"
+          className="mb-6 border-primary/30 bg-primary/5 hover:bg-primary/10 text-primary hover:text-primary rounded-full"
           onClick={() => navigate("/workspace")}
         >
-          <ArrowLeft className="h-4 w-4 mr-2 " />
+          <ArrowLeft className="h-4 w-4 mr-2" />
           Back to Workspace
         </Button>
 
-        {/* Project Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl text-muted-foreground font-bold mb-2">Project {projectId}</h1>
-          <p className="text-muted-foreground">Manage documents, chat, and configure settings</p>
+        {/* Project Header Card */}
+        <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-border rounded-2xl p-8 mb-8">
+          <div className="flex items-start justify-between mb-6">
+            <div className="flex items-center gap-4">
+              {/* Gradient Folder Icon */}
+              <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-primary to-teal-500 flex items-center justify-center shadow-lg shadow-primary/20">
+                <Folder className="h-7 w-7 text-white" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold text-foreground mb-1">
+                  {projectData.name}
+                </h1>
+                <p className="text-muted-foreground">{projectData.description}</p>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <Button variant="outline" className="border-border">
+                Share
+              </Button>
+            </div>
+          </div>
+          
+          {/* Project Stats */}
+          <div className="grid grid-cols-3 gap-4">
+            <div className="bg-background/50 rounded-lg p-4 border border-border">
+              <div className="flex items-center gap-2 text-muted-foreground mb-1">
+                <FileText className="h-4 w-4" />
+                <span className="text-xs font-medium">Documents</span>
+              </div>
+              <p className="text-2xl font-bold text-foreground">{projectData.documentCount}</p>
+            </div>
+            <div className="bg-background/50 rounded-lg p-4 border border-border">
+              <div className="flex items-center gap-2 text-muted-foreground mb-1">
+                <Calendar className="h-4 w-4" />
+                <span className="text-xs font-medium">Created</span>
+              </div>
+              <p className="text-sm font-semibold text-foreground">
+                {new Date(projectData.createdAt).toLocaleDateString()}
+              </p>
+            </div>
+            <div className="bg-background/50 rounded-lg p-4 border border-border">
+              <div className="flex items-center gap-2 text-muted-foreground mb-1">
+                <div className="w-4 h-4 rounded-full bg-primary"></div>
+                <span className="text-xs font-medium">Status</span>
+              </div>
+              <p className="text-sm font-semibold text-foreground">Active</p>
+            </div>
+          </div>
         </div>
 
         {/* Tabs */}
