@@ -1,16 +1,13 @@
 # Rag application
 
+
+
 An implementation of a Retrieval-Augmented Generation (RAG) model for question answering application.
 This app allows users to upload documents and ask questions, returning context-aware answers based on the uploaded content.
 
 ## Table of Contents
 
 - [Technologies](#technologies)
-  - [Languages and Frameworks](#languages-and-frameworks)
-  - [Databases](#databases)
-  - [ORM & Migrations](#orm--migrations)
-  - [LLM Providers](#llm-providers)
-  - [Utilities](#utilities)
 - [RAG Application Workflow](#rag-retrieval-augmented-generation-application-workflow)
   - [1. Upload a Document](#1-upload-a-document)
   - [2. Process the Document](#2-process-the-document)
@@ -35,28 +32,30 @@ This app allows users to upload documents and ask questions, returning context-a
 ## Technologies
 
 ### Languages and Frameworks
-![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)
-![FastAPI](https://img.shields.io/badge/FastAPI-Asynchronous-green.svg)
-![Uvicorn](https://img.shields.io/badge/Uvicorn-ASGI-red.svg)
-![Pydantic](https://img.shields.io/badge/Pydantic-v2+-green.svg)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![Uvicorn](https://img.shields.io/badge/Uvicorn-6E3BEB?style=for-the-badge&logo=python&logoColor=white)
+![Pydantic](https://img.shields.io/badge/Pydantic-00B3C4?style=for-the-badge&logo=python&logoColor=white)
 
 ### Databases
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-blue.svg?logo=postgresql)
-![MongoDB](https://img.shields.io/badge/MongoDB-6.x-green.svg?logo=mongodb)
-![pgvector](https://img.shields.io/badge/pgvector-0.5+-orange.svg)
-![Qdrant](https://img.shields.io/badge/Qdrant-VectorDB-blueviolet.svg)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![pgvector](https://img.shields.io/badge/pgvector-FF6F00?style=for-the-badge&logo=postgresql&logoColor=white)
+![Qdrant](https://img.shields.io/badge/Qdrant-4A90E2?style=for-the-badge&logo=python&logoColor=white)
 
 ### ORM & Migrations
-![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-ORM-red.svg)
-![Alembic](https://img.shields.io/badge/Alembic-Migrations-lightgrey.svg)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-000000?style=for-the-badge&logo=sqlalchemy&logoColor=white)
+![Alembic](https://img.shields.io/badge/Alembic-6E3BEB?style=for-the-badge&logo=python&logoColor=white)
 
 ### LLM Providers
-![OpenAI](https://img.shields.io/badge/OpenAI-API-black.svg)
-![Cohere](https://img.shields.io/badge/Cohere-LLM-purple.svg)
-![Ollama](https://img.shields.io/badge/Ollama-Local-orange.svg)
+![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white)
+![Cohere](https://img.shields.io/badge/Cohere-0080FF?style=for-the-badge&logo=cohere&logoColor=white)
+![Ollama](https://img.shields.io/badge/Ollama-FF6F61?style=for-the-badge&logo=python&logoColor=white)
 
 ### Utilities
-![ngrok](https://img.shields.io/badge/ngrok-SecureTunnel-orange.svg)
+![ngrok](https://img.shields.io/badge/ngrok-14A8FF?style=for-the-badge&logo=ngrok&logoColor=white)
+
+
 
 ## RAG (Retrieval-Augmented Generation) Application Workflow
 
