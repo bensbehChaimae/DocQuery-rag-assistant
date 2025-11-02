@@ -37,13 +37,13 @@ export default function ProjectDetail() {
         </Button>
 
         {/* Project Header Card */}
-        <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-border rounded-2xl p-8 mb-8">
+        <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-border rounded-2xl p-4 mb-8">
           <div className="flex items-start gap-6">
             {/* Left Side - Icon, Title, Description */}
             <div className="flex items-start gap-4 flex-1">
               {/* Gradient Folder Icon */}
-              <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-primary to-teal-500 flex items-center justify-center shadow-lg shadow-primary/20 flex-shrink-0">
-                <Folder className="h-8 w-8 text-white" />
+              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-teal-500 flex items-center justify-center shadow-lg shadow-primary/20 flex-shrink-0">
+                <Folder className="h-5 w-5 text-white" />
               </div>
               <div className="flex-1">
                 <h1 className="text-3xl font-bold text-foreground mb-3">
@@ -56,20 +56,20 @@ export default function ProjectDetail() {
             </div>
             
             {/* Right Side - Stats Stacked */}
-            <div className="flex flex-col gap-3 w-48">
-              <div className="bg-background/50 rounded-lg p-4 border border-border">
-                <div className="flex items-center gap-2 text-muted-foreground mb-1">
+            <div className="flex flex-col gap-2 w-48">
+              <div className="bg-background/50 rounded-lg p-3 border border-border">
+                <div className="flex items-center gap-2 text-muted-foreground mb-0.5">
                   <FileText className="h-4 w-4" />
-                  <span className="text-xs font-medium">Documents</span>
+                  <span className="text-sm">Documents</span>
                 </div>
-                <p className="text-2xl font-bold text-foreground">{projectData.documentCount}</p>
+                <p className="text-xs font-bold !text-center text-foreground mt-1">{projectData.documentCount} docs </p>
               </div>
-              <div className="bg-background/50 rounded-lg p-4 border border-border">
-                <div className="flex items-center gap-2 text-muted-foreground mb-1">
+              <div className="bg-background/50 rounded-lg p-3 border border-border">
+                <div className="flex items-center gap-2 text-muted-foreground mb-0.5">
                   <Calendar className="h-4 w-4" />
-                  <span className="text-xs font-medium">Created</span>
+                  <span className="text-sm font-medium">Created</span>
                 </div>
-                <p className="text-sm font-semibold text-foreground">
+                <p className="text-xs !text-center font-semibold text-foreground mt-1 leading-tight">
                   {new Date(projectData.createdAt).toLocaleDateString('en-US', { 
                     month: 'short', 
                     day: 'numeric', 
