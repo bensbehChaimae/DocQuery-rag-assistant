@@ -16,7 +16,7 @@ export default function ProjectDetail() {
   // Mock project data - replace with actual data fetching
   const projectData = {
     name: `Project ${projectId}`,
-    description: "Legal Documents",
+    description: "Contract reviews and legal documentation for corporate clients. This project contains all essential documents and correspondence related to ongoing legal matters.",
     documentCount: 8,
     createdAt: "2025-01-10"
   };
@@ -38,50 +38,45 @@ export default function ProjectDetail() {
 
         {/* Project Header Card */}
         <div className="bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-border rounded-2xl p-8 mb-8">
-          <div className="flex items-start justify-between mb-6">
-            <div className="flex items-center gap-4">
+          <div className="flex items-start gap-6">
+            {/* Left Side - Icon, Title, Description */}
+            <div className="flex items-start gap-4 flex-1">
               {/* Gradient Folder Icon */}
-              <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-primary to-teal-500 flex items-center justify-center shadow-lg shadow-primary/20">
-                <Folder className="h-7 w-7 text-white" />
+              <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-primary to-teal-500 flex items-center justify-center shadow-lg shadow-primary/20 flex-shrink-0">
+                <Folder className="h-8 w-8 text-white" />
               </div>
-              <div>
-                <h1 className="text-3xl font-bold text-foreground mb-1">
+              <div className="flex-1">
+                <h1 className="text-3xl font-bold text-foreground mb-3">
                   {projectData.name}
                 </h1>
-                <p className="text-muted-foreground">{projectData.description}</p>
+                <p className="text-muted-foreground text-base leading-relaxed">
+                  {projectData.description}
+                </p>
               </div>
             </div>
-            <div className="flex gap-2">
-              <Button variant="outline" className="border-border">
-                Share
-              </Button>
-            </div>
-          </div>
-          
-          {/* Project Stats */}
-          <div className="grid grid-cols-3 gap-4">
-            <div className="bg-background/50 rounded-lg p-4 border border-border">
-              <div className="flex items-center gap-2 text-muted-foreground mb-1">
-                <FileText className="h-4 w-4" />
-                <span className="text-xs font-medium">Documents</span>
+            
+            {/* Right Side - Stats Stacked */}
+            <div className="flex flex-col gap-3 w-48">
+              <div className="bg-background/50 rounded-lg p-4 border border-border">
+                <div className="flex items-center gap-2 text-muted-foreground mb-1">
+                  <FileText className="h-4 w-4" />
+                  <span className="text-xs font-medium">Documents</span>
+                </div>
+                <p className="text-2xl font-bold text-foreground">{projectData.documentCount}</p>
               </div>
-              <p className="text-2xl font-bold text-foreground">{projectData.documentCount}</p>
-            </div>
-            <div className="bg-background/50 rounded-lg p-4 border border-border">
-              <div className="flex items-center gap-2 text-muted-foreground mb-1">
-                <Calendar className="h-4 w-4" />
-                <span className="text-xs font-medium">Created</span>
+              <div className="bg-background/50 rounded-lg p-4 border border-border">
+                <div className="flex items-center gap-2 text-muted-foreground mb-1">
+                  <Calendar className="h-4 w-4" />
+                  <span className="text-xs font-medium">Created</span>
+                </div>
+                <p className="text-sm font-semibold text-foreground">
+                  {new Date(projectData.createdAt).toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric', 
+                    year: 'numeric' 
+                  })}
+                </p>
               </div>
-              <p className="text-sm font-semibold text-foreground">
-                {new Date(projectData.createdAt).toLocaleDateString()}
-              </p>
-            </div>
-            <div className="bg-background/50 rounded-lg p-4 border border-border">
-              <div className="flex items-center gap-2 text-muted-foreground mb-1">
-                <div className="w-4 h-4 rounded-full bg-primary"></div>
-                <span className="text-xs font-medium">Status</span>
-              </div>
-              <p className="text-sm font-semibold text-foreground">Active</p>
             </div>
           </div>
         </div>
