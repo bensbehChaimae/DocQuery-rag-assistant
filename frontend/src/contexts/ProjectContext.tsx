@@ -41,9 +41,14 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
   }, [projects]);
 
   const addProject = (project: Omit<Project, "id">) => {
+    // Find the highest existing ID and add 1
+    const maxId = projects.length > 0 
+      ? Math.max(...projects.map(p => p.id)) 
+      : 0;
+    
     const newProject: Project = {
       ...project,
-      id: Date.now(), // Use timestamp for unique ID
+      id: maxId + 1, // Incremental ID: 1, 2, 3, 4...
     };
     setProjects(prev => [...prev, newProject]);
   };

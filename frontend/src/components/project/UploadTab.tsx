@@ -24,15 +24,7 @@ interface UploadTabProps {
 }
 
 export function UploadTab({ projectId }: UploadTabProps) {
-  const [files, setFiles] = useState<UploadedFile[]>([
-    {
-      id: "1",
-      name: "research_paper.pdf",
-      size: "2.4 MB",
-      uploadDate: "2025-01-20",
-      status: "indexed"
-    }
-  ]);
+  const [files, setFiles] = useState<UploadedFile[]>([]);
   
   const [isDragging, setIsDragging] = useState(false);
   const [isProcessModalOpen, setIsProcessModalOpen] = useState(false);
