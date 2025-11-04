@@ -1,17 +1,18 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 export interface UploadedFile {
-  id: string;
+  id: string; // Frontend ID
+  fileId?: string; // Backend file_id from API
   name: string;
   size: string;
   uploadDate: string;
   status: "uploaded" | "processing" | "indexed" | "error";
-  projectId: string; // Link files to projects
+  projectId: string;
 }
 
 interface FilesContextType {
   files: UploadedFile[];
-  addFile: (file: Omit<UploadedFile, "id">) => void;
+  addFile: (file: Omit<UploadedFile, "id">) => string;
   updateFile: (id: string, updates: Partial<UploadedFile>) => void;
   deleteFile: (id: string) => void;
   getFilesByProject: (projectId: string) => UploadedFile[];
@@ -23,7 +24,6 @@ const STORAGE_KEY = "docuchat_files";
 
 export function FilesProvider({ children }: { children: ReactNode }) {
   const [files, setFiles] = useState<UploadedFile[]>(() => {
-    // Load files from localStorage on initial render
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) {
       try {
@@ -36,17 +36,17 @@ export function FilesProvider({ children }: { children: ReactNode }) {
     return [];
   });
 
-  // Save to localStorage whenever files change
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(files));
   }, [files]);
 
-  const addFile = (file: Omit<UploadedFile, "id">) => {
+  const addFile = (file: Omit<UploadedFile, "id">): string => {
     const newFile: UploadedFile = {
       ...file,
       id: `file_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
     };
     setFiles(prev => [...prev, newFile]);
+    return newFile.id;
   };
 
   const updateFile = (id: string, updates: Partial<UploadedFile>) => {
