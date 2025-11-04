@@ -99,7 +99,7 @@ export default function Home() {
           <div className="flex flex-col items-center justify-center text-center py-20 lg:py-32">
             <div className="space-y-8 animate-fade-in max-w-4xl">
               <div className="inline-block px-4 py-2 bg-primary/10 border border-primary/20 rounded-full backdrop-blur-sm">
-                <span className="text-sm font-medium text-primary">AI-Powered Document Intelligence</span>
+                <span className="text-sm font-medium text-primary">RAG-Powered Document Intelligence</span>
               </div>
               <motion.h1
                 className="text-5xl lg:text-7xl font-bold leading-tight"
@@ -147,7 +147,7 @@ export default function Home() {
                 <Link to="/workspace" className="group relative inline-block">
                   <div className="absolute -inset-1 bg-gradient-to-r from-primary via-cyan-500 to-primary rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
                   <Button size="lg" className="relative gradient-primary shadow-glow text-lg h-14 px-8 hover:scale-105 transition-transform duration-200">
-                    Get Started Free
+                    Get Started 
                   </Button>
                 </Link>
               </div>
@@ -175,13 +175,13 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {steps.map((step, index) => (
-              <Card key={index} className="glass hover:shadow-glow transition-smooth group">
+              <Card key={index} className="cursor-pointer glass hover:shadow-glow transition-smooth group">
                 <CardContent className="p-8 space-y-4">
                   <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center group-hover:shadow-glow transition-smooth">
                     <step.icon className="h-8 w-8 text-primary" />
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-4xl font-bold text-primary/20">0{index + 1}</span>
+                    <span className="text-4xl font-bold text-primary">0{index + 1}</span>
                     <h3 className="text-2xl font-bold text-card">{step.title}</h3>
                   </div>
                   <p className="text-card leading-relaxed opacity-80">

@@ -18,6 +18,8 @@ interface Project {
   createdAt: string;
 }
 
+
+
 export default function Workspace() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
@@ -25,24 +27,28 @@ export default function Workspace() {
   const [newProjectName, setNewProjectName] = useState("");
   const [newProjectDescription, setNewProjectDescription] = useState("");
   
+
+
   // Mock projects data
   const [projects, setProjects] = useState<Project[]>([
     {
       id: 1,
       name: "Research Papers",
       description: "Collection of academic papers on machine learning",
-      documentCount: 12,
-      createdAt: "2025-01-15"
+      documentCount: 3,
+      createdAt: "2025-11-4"
     },
     {
       id: 2,
       name: "Legal Documents",
       description: "Contract reviews and legal documentation",
-      documentCount: 8,
-      createdAt: "2025-01-10"
+      documentCount: 2,
+      createdAt: "2025-11-6"
     }
   ]);
 
+
+  
   const handleCreateProject = () => {
     if (!newProjectName.trim()) {
       toast.error("Please enter a project name");
