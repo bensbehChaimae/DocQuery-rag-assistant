@@ -7,19 +7,35 @@ import { UploadTab } from "@/components/project/UploadTab";
 import { ChatTab } from "@/components/project/ChatTab";
 import { SettingsTab } from "@/components/project/SettingsTab";
 import { ArrowLeft, Upload, MessageSquare, Settings, Folder, FileText, Calendar } from "lucide-react";
+import { useProjects } from "@/contexts/ProjectContext";
 
 export default function ProjectDetail() {
-  const { projectId } = useParams();
   const navigate = useNavigate();
+  const { projectId } = useParams(); // Get projectId from URL
   const [activeTab, setActiveTab] = useState("upload");
+  const { getProject } = useProjects();
 
-  // Mock project data - replace with actual data fetching
-  const projectData = {
-    name: `Project ${projectId}`,
-    description: "Contract reviews and legal documentation for corporate clients. This project contains all essential documents and correspondence related to ongoing legal matters.",
-    documentCount: 8,
-    createdAt: "2025-01-10"
-  };
+  // Get the actual project data from context
+  const project = getProject(Number(projectId));
+
+  // If project not found, show error or redirect
+  if (!project) {
+    return (
+      <div className="min-h-screen dark bg-background">
+        <Header />
+        <main className="container py-8">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-foreground mb-4">Project Not Found</h1>
+            <p className="text-muted-foreground mb-6">The project you're looking for doesn't exist.</p>
+            <Button onClick={() => navigate("/workspace")}>
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Workspace
+            </Button>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen dark bg-background">
@@ -47,10 +63,10 @@ export default function ProjectDetail() {
               </div>
               <div className="flex-1">
                 <h1 className="text-3xl font-bold text-foreground mb-3">
-                  {projectData.name}
+                  {project.name}
                 </h1>
                 <p className="text-muted-foreground text-base leading-relaxed">
-                  {projectData.description}
+                  {project.description}
                 </p>
               </div>
             </div>
@@ -62,7 +78,7 @@ export default function ProjectDetail() {
                   <FileText className="h-4 w-4" />
                   <span className="text-sm">Documents</span>
                 </div>
-                <p className="text-xs font-bold !text-center text-foreground mt-1">{projectData.documentCount} docs </p>
+                <p className="text-xs font-bold !text-center text-foreground mt-1">{project.documentCount} docs </p>
               </div>
               <div className="bg-background/50 rounded-lg p-3 border border-border">
                 <div className="flex items-center gap-2 text-muted-foreground mb-0.5">
@@ -70,7 +86,7 @@ export default function ProjectDetail() {
                   <span className="text-sm font-medium">Created</span>
                 </div>
                 <p className="text-xs !text-center font-semibold text-foreground mt-1 leading-tight">
-                  {new Date(projectData.createdAt).toLocaleDateString('en-US', { 
+                  {new Date(project.createdAt).toLocaleDateString('en-US', { 
                     month: 'short', 
                     day: 'numeric', 
                     year: 'numeric' 
