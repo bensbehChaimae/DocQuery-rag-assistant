@@ -8,6 +8,7 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { Sliders, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { useProjects } from "@/contexts/ProjectContext";
 
 interface SettingsTabProps {
   projectId: string;
@@ -15,6 +16,7 @@ interface SettingsTabProps {
 
 export function SettingsTab({ projectId }: SettingsTabProps) {
   const navigate = useNavigate();
+  const { deleteProject } = useProjects();
   const [chunkSize, setChunkSize] = useState(100);
   const [overlapSize, setOverlapSize] = useState(20);
   const [autoIndex, setAutoIndex] = useState(true);
@@ -24,6 +26,7 @@ export function SettingsTab({ projectId }: SettingsTabProps) {
   };
 
   const handleDeleteProject = () => {
+    deleteProject(Number(projectId));
     toast.success("Project deleted");
     navigate("/workspace");
   };
