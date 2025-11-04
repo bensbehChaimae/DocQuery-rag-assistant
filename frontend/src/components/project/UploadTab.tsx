@@ -1,34 +1,27 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
 import { UploadCloud, FileText, Calendar, Trash2, Play, CheckCircle, XCircle, Clock } from "lucide-react";
 import { toast } from "sonner";
-
-interface UploadedFile {
-  id: string;
-  name: string;
-  size: string;
-  uploadDate: string;
-  status: "uploaded" | "processing" | "indexed" | "error";
-}
+import { useFiles } from "@/contexts/FilesContext";
 
 interface UploadTabProps {
   projectId: string;
 }
 
 export function UploadTab({ projectId }: UploadTabProps) {
-  const [files, setFiles] = useState<UploadedFile[]>([]);
+  const { getFilesByProject, addFile, updateFile, deleteFile } = useFiles();
+  const files = getFilesByProject(projectId);
   
   const [isDragging, setIsDragging] = useState(false);
   const [isProcessModalOpen, setIsProcessModalOpen] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<UploadedFile | null>(null);
+  const [selectedFileId, setSelectedFileId] = useState<string | null>(null);
   const [chunkSize, setChunkSize] = useState(100);
   const [overlapSize, setOverlapSize] = useState(20);
   const [doReset, setDoReset] = useState(false);
@@ -58,50 +51,46 @@ export function UploadTab({ projectId }: UploadTabProps) {
   };
 
   const handleFiles = (fileList: File[]) => {
-    // Mock file upload
-    const newFiles: UploadedFile[] = fileList.map((file, index) => ({
-      id: (files.length + index + 1).toString(),
-      name: file.name,
-      size: (file.size / (1024 * 1024)).toFixed(2) + " MB",
-      uploadDate: new Date().toISOString().split('T')[0],
-      status: "uploaded" as const
-    }));
+    fileList.forEach((file) => {
+      addFile({
+        name: file.name,
+        size: (file.size / (1024 * 1024)).toFixed(2) + " MB",
+        uploadDate: new Date().toISOString().split('T')[0],
+        status: "uploaded",
+        projectId: projectId
+      });
+    });
     
-    setFiles([...files, ...newFiles]);
     toast.success(`${fileList.length} file(s) uploaded successfully`);
   };
 
-  const handleProcess = (file: UploadedFile) => {
-    setSelectedFile(file);
+  const handleProcess = (fileId: string) => {
+    setSelectedFileId(fileId);
     setIsProcessModalOpen(true);
   };
 
   const handleProcessSubmit = () => {
-    if (!selectedFile) return;
+    if (!selectedFileId) return;
     
-    // Mock processing
-    setFiles(files.map(f => 
-      f.id === selectedFile.id ? { ...f, status: "processing" as const } : f
-    ));
+    // Start processing
+    updateFile(selectedFileId, { status: "processing" });
     
     toast.success("Processing started");
     setIsProcessModalOpen(false);
     
     // Simulate processing completion
     setTimeout(() => {
-      setFiles(files.map(f => 
-        f.id === selectedFile.id ? { ...f, status: "indexed" as const } : f
-      ));
+      updateFile(selectedFileId, { status: "indexed" });
       toast.success("File processed and indexed");
     }, 3000);
   };
 
   const handleDelete = (fileId: string) => {
-    setFiles(files.filter(f => f.id !== fileId));
+    deleteFile(fileId);
     toast.success("File deleted");
   };
 
-  const getStatusBadge = (status: UploadedFile["status"]) => {
+  const getStatusBadge = (status: "uploaded" | "processing" | "indexed" | "error") => {
     const variants = {
       uploaded: { variant: "secondary" as const, icon: FileText, label: "Uploaded" },
       processing: { variant: "default" as const, icon: Clock, label: "Processing" },
@@ -181,7 +170,7 @@ export function UploadTab({ projectId }: UploadTabProps) {
                           <Button
                             size="sm"
                             variant="outline"
-                            onClick={() => handleProcess(file)}
+                            onClick={() => handleProcess(file.id)}
                             disabled={file.status === "processing"}
                           >
                             <Play className="h-4 w-4" />
@@ -208,11 +197,11 @@ export function UploadTab({ projectId }: UploadTabProps) {
       <Dialog open={isProcessModalOpen} onOpenChange={setIsProcessModalOpen}>
         <DialogContent className="dark">
           <DialogHeader>
-            <DialogTitle>Process File</DialogTitle>
+            <DialogTitle className="text-primary">Process File</DialogTitle>
           </DialogHeader>
           <div className="space-y-6 pt-4">
             <div className="space-y-3">
-              <Label>Chunk Size: {chunkSize}</Label>
+              <Label className="text-muted-foreground font-bold">Chunk Size: {chunkSize}</Label>
               <Slider
                 value={[chunkSize]}
                 onValueChange={(value) => setChunkSize(value[0])}
@@ -222,7 +211,7 @@ export function UploadTab({ projectId }: UploadTabProps) {
               />
             </div>
             <div className="space-y-3">
-              <Label>Overlap Size: {overlapSize}</Label>
+              <Label className="text-muted-foreground font-bold">Overlap Size: {overlapSize}</Label>
               <Slider
                 value={[overlapSize]}
                 onValueChange={(value) => setOverlapSize(value[0])}
@@ -237,10 +226,10 @@ export function UploadTab({ projectId }: UploadTabProps) {
                 checked={doReset}
                 onCheckedChange={(checked) => setDoReset(checked as boolean)}
               />
-              <Label htmlFor="reset">Reset existing index</Label>
+              <Label className="text-muted-foreground/45" htmlFor="reset">Reset existing index</Label>
             </div>
             <div className="flex justify-end gap-3 pt-4">
-              <Button variant="outline" onClick={() => setIsProcessModalOpen(false)}>
+              <Button className="bg-red-500 text-white hover:bg-red-600" variant="outline" onClick={() => setIsProcessModalOpen(false)}>
                 Cancel
               </Button>
               <Button className="gradient-primary" onClick={handleProcessSubmit}>
