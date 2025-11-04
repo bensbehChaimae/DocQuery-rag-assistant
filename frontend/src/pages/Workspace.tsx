@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useProjects } from "@/contexts/ProjectContext";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,60 +11,27 @@ import { Textarea } from "@/components/ui/textarea";
 import { Search, Plus, Folder, FileText, Calendar } from "lucide-react";
 import { toast } from "sonner";
 
-interface Project {
-  id: number;
-  name: string;
-  description: string;
-  documentCount: number;
-  createdAt: string;
-}
-
-
-
 export default function Workspace() {
   const navigate = useNavigate();
+  const { projects, addProject } = useProjects();
   const [searchQuery, setSearchQuery] = useState("");
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [newProjectName, setNewProjectName] = useState("");
   const [newProjectDescription, setNewProjectDescription] = useState("");
-  
 
-
-  // Mock projects data
-  const [projects, setProjects] = useState<Project[]>([
-    {
-      id: 1,
-      name: "Research Papers",
-      description: "Collection of academic papers on machine learning",
-      documentCount: 3,
-      createdAt: "2025-11-4"
-    },
-    {
-      id: 2,
-      name: "Legal Documents",
-      description: "Contract reviews and legal documentation",
-      documentCount: 2,
-      createdAt: "2025-11-6"
-    }
-  ]);
-
-
-  
   const handleCreateProject = () => {
     if (!newProjectName.trim()) {
       toast.error("Please enter a project name");
       return;
     }
 
-    const newProject: Project = {
-      id: projects.length + 1,
+    addProject({
       name: newProjectName,
       description: newProjectDescription,
       documentCount: 0,
       createdAt: new Date().toISOString().split('T')[0]
-    };
+    });
 
-    setProjects([...projects, newProject]);
     setNewProjectName("");
     setNewProjectDescription("");
     setIsCreateModalOpen(false);
@@ -80,8 +48,6 @@ export default function Workspace() {
       <Header />
       
       <main className="container py-12 mt-8">
-
-
         {/* Page Header */}
         <div className="space-y-2 mb-8">
           <h1 className="text-4xl !text-primary font-bold">Your Projects</h1>
@@ -89,7 +55,6 @@ export default function Workspace() {
             Manage your document projects and collaborate with your team
           </p>
         </div>
-
 
         {/* Search and Filter Bar */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -102,7 +67,6 @@ export default function Workspace() {
               className="pl-10"
             />
           </div>
-
           <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
             <DialogTrigger asChild>
               <Button className="gradient-primary shadow-glow">
@@ -149,10 +113,12 @@ export default function Workspace() {
           </Dialog>
         </div>
 
-
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
           
+          
+
           {/* Project Cards */}
           {filteredProjects.map((project) => (
             <Card 
@@ -203,11 +169,14 @@ export default function Workspace() {
           </Card>
         </div>
 
+
         {filteredProjects.length === 0 && (
           <div className="text-center py-12">
             <p className="text-lg text-muted-foreground">No projects found</p>
           </div>
         )}
+
+        
       </main>
     </div>
   );
