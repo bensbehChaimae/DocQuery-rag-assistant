@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -22,7 +22,7 @@ export function UploadTab({ projectId }: UploadTabProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [isProcessModalOpen, setIsProcessModalOpen] = useState(false);
   const [selectedFileId, setSelectedFileId] = useState<string | null>(null);
-  const [chunkSize, setChunkSize] = useState(100);
+  const [chunkSize, setChunkSize] = useState(400);
   const [overlapSize, setOverlapSize] = useState(20);
   const [doReset, setDoReset] = useState(false);
 
