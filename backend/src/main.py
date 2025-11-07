@@ -7,6 +7,8 @@ from stores.vectorDB.VectorDBProviderFactory import VectorDBProviderFactory
 from stores.LLM.templates.template_parser import TemplateParser
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
+from fastapi.middleware.cors import CORSMiddleware
+
 
 # Import metrics setup
 from utils.metrics import setup_metrics
@@ -14,6 +16,17 @@ from utils.metrics import setup_metrics
 
 # Define the fastapi app :
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:8080"     # Your React app is running on port 8080
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],              # Allow all HTTP methods
+    allow_headers=["*"],              # Allow all headers
+)
+
 
 # Setup Prometheus metrics
 setup_metrics(app)
