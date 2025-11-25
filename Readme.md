@@ -77,11 +77,11 @@ This step involves:
 - Chunking the extracted text into smaller pieces (documents/passages).
 - Parsing and cleaning the data as needed.
 
-![Data parsing](src/assets/images/Data_parsing.png)
+![Data parsing](backend/src/assets/images/Data_parsing.png)
 
 **Indexing**
 
-![indexing](src/assets/images/Indexing.png)
+![indexing](backend/src/assets/images/Indexing.png)
 
 - The chunks are converted into embeddings using an embedding model.
 - The embeddings are stored in a vector store for efficient similarity search.
@@ -93,7 +93,7 @@ When a query is submitted:
 - The query is converted into an embedding.
 - A similarity search is performed against the vector store to retrieve the most relevant chunks.
 
-![search](src/assets/images/Semantic_search.png)
+![search](backend/src/assets/images/Semantic_search.png)
 
 ### 4. Generate the Answer
 
@@ -101,19 +101,19 @@ When a query is submitted:
 - The prompt is passed to an LLM (Large Language Model).
 - The LLM returns a response grounded in the relevant information.
 
-![answer](src/assets/images/Get_answer.png)
+![answer](backend/src/assets/images/Get_answer.png)
 
 ## Project Architecture
 
 ### API Architecture Overview
 
-![api](src/assets/architecture/API_architecture.png)
+![api](backend/src/assets/architecture/API_architecture.png)
 
 This API architecture is built with FastAPI and provides routes for monitoring, document ingestion, semantic indexing, and health checks. Documents can be uploaded, processed into chunks, stored in a VectorDB, and then queried for search or Q&A with an LLM. Metrics endpoints support observability, while base endpoints handle system and health information.
 
 ### Project Architecture Overview
 
-![app](src/assets/architecture/architecture.png)
+![app](backend/src/assets/architecture/architecture.png)
 
 This architecture enables users to upload documents and query them through a FastAPI backend. Document processing runs in the background via Celery, where text is extracted (using PyMuPDF and Tesseract), converted into vector embeddings with Cohere, and stored in Qdrant. When a question is asked, the system retrieves the most relevant document chunks and leverages LangChain to generate a context-aware response. The entire solution is containerized with Docker, deployed on DigitalOcean, and monitored using Prometheus and Grafana.
 
