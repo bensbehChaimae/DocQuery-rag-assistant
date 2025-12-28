@@ -1,7 +1,5 @@
 # Rag application
 
-
-
 An implementation of a Retrieval-Augmented Generation (RAG) model for question answering application.
 This app allows users to upload documents and ask questions, returning context-aware answers based on the uploaded content.
 
@@ -31,6 +29,8 @@ This app allows users to upload documents and ask questions, returning context-a
 
 ## Technologies
 
+<details>
+
 ### Languages and Frameworks
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
@@ -55,9 +55,12 @@ This app allows users to upload documents and ask questions, returning context-a
 ### Utilities
 ![ngrok](https://img.shields.io/badge/ngrok-14A8FF?style=for-the-badge&logo=ngrok&logoColor=white)
 
+</details>
 
 
 ## RAG (Retrieval-Augmented Generation) Application Workflow
+
+<details>
 
 Traditional language models (LLMs) generate answers based only on the knowledge they were trained on. This can lead to outdated or hallucinated responses, especially when dealing with domain-specific or dynamic information.
 
@@ -103,7 +106,11 @@ When a query is submitted:
 
 ![answer](backend/src/assets/images/Get_answer.png)
 
+</details>
+
 ## Project Architecture
+
+<details>
 
 ### API Architecture Overview
 
@@ -113,15 +120,21 @@ This API architecture is built with FastAPI and provides routes for monitoring, 
 
 ### Project Architecture Overview
 
+
 ![app](backend/src/assets/architecture/architecture.png)
 
 This architecture enables users to upload documents and query them through a FastAPI backend. Document processing runs in the background via Celery, where text is extracted (using PyMuPDF and Tesseract), converted into vector embeddings with Cohere, and stored in Qdrant. When a question is asked, the system retrieves the most relevant document chunks and leverages LangChain to generate a context-aware response. The entire solution is containerized with Docker, deployed on DigitalOcean, and monitored using Prometheus and Grafana.
+
+</details>
+
 
 ## Requirements
 
 - Python 3.12
 
 ## Installation
+
+<details>
 
 ### Install Dependencies
 
@@ -172,8 +185,11 @@ Set your environment variables in the `.env` file.
 ```bash
 $ cp .env.example .env
 ```
+</details>
 
 ## Running the Application
+
+<details>
 
 ### Run the FastAPI Server
 
@@ -199,10 +215,12 @@ Copy `.env.example` in your `.env` and update it with your credentials.
 $ cd docker
 $ cp .env.example .env
 ```
+</details>
+
 
 ## Optional Setup
 
-Setup your command line interface for better readability:
+Setup your command line interface for better readability: ( for ubunut (WSL) ) 
 
 ```bash
 export PS1="\[\033[01;32m\]\u@\h:\w\n\[\033[00m\]\$ "
