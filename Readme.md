@@ -1,7 +1,5 @@
 # Rag application
 
-
-
 An implementation of a Retrieval-Augmented Generation (RAG) model for question answering application.
 This app allows users to upload documents and ask questions, returning context-aware answers based on the uploaded content.
 
@@ -65,26 +63,18 @@ Traditional language models (LLMs) generate answers based only on the knowledge 
 
 In a typical RAG pipeline: 
 
+![RAG](/backend/src/assets/images/NaiveRAG.png)
+
 ### 1. Upload a Document
 
 - The user uploads one or more documents (PDF, TXT, etc.) to be used as the knowledge base.
 
 ### 2. Process the Document
 
-This step involves:
-
-- Extracting text from the uploaded files.
-- Chunking the extracted text into smaller pieces (documents/passages).
-- Parsing and cleaning the data as needed.
-
-![Data parsing](src/assets/images/Data_parsing.png)
-
-**Indexing**
-
-![indexing](src/assets/images/Indexing.png)
-
-- The chunks are converted into embeddings using an embedding model.
-- The embeddings are stored in a vector store for efficient similarity search.
+- Extract text from the uploaded documents.
+- Chunk the extracted text into chunks.
+- The chunks get transformed into vectors (embeddings) using an embedding model. 
+- The embeddings are stored in a vectorDB store for efficient similarity search.
 
 ### 3. Search for Similar Documents (Semantic Search)
 
@@ -93,15 +83,12 @@ When a query is submitted:
 - The query is converted into an embedding.
 - A similarity search is performed against the vector store to retrieve the most relevant chunks.
 
-![search](src/assets/images/Semantic_search.png)
-
 ### 4. Generate the Answer
 
 - A prompt is constructed using the user query and retrieved documents.
 - The prompt is passed to an LLM (Large Language Model).
 - The LLM returns a response grounded in the relevant information.
 
-![answer](src/assets/images/Get_answer.png)
 
 ## Project Architecture
 
