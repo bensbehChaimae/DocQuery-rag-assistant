@@ -112,7 +112,7 @@ This API architecture is built with FastAPI and provides routes for monitoring, 
 ### Project Architecture Overview
 
 
-![app](backend/src/assets/architecture/architecture.png)
+![architecture](backend/src/assets/architecture/architecture.png)
 
 This architecture enables users to upload documents and query them through a FastAPI backend. Document processing runs in the background via Celery, where text is extracted (using PyMuPDF and Tesseract), converted into vector embeddings with Cohere, and stored in Qdrant. When a question is asked, the system retrieves the most relevant document chunks and leverages LangChain to generate a context-aware response. The entire solution is containerized with Docker, deployed on DigitalOcean, and monitored using Prometheus and Grafana.
 
